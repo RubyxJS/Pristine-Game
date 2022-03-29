@@ -2,16 +2,18 @@ package com.muby;
 import static org.lwjgl.opengl.GL40.*;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.opengl.GL;
 
 import sun.java2d.marlin.Version;
 
 import static org.lwjgl.glfw.GLFW.*;
-class Window {
+public class Window {
     private int width, height;
     private String title;
     private Long glfwWindow;
     private static Window instance = null;
+    private GLFWErrorCallback errorCallback;
     private Window() {
         this.width = 1920;
         this.height = 1080;
@@ -45,6 +47,11 @@ class Window {
             throw new IllegalStateException("Failed to create the GLFW window");
         }
 
+        //Mouse Listener Callbacks
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePoseCallback);
+        glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
+        glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
         //Enable vsync
@@ -62,9 +69,13 @@ class Window {
         }
     }
     public void run() {
-        System.out.println("Hello" + Version.getVersion() + "!");
+        System.out.println("Hello !");
         init();
         loop();
+
+        // Terminate GLFW and the free the error callback
+        glfwTerminate();
+        errorCallback.free();
     }
 
 }
