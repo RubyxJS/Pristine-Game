@@ -4,7 +4,8 @@ import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.glfw.GLFW.*;
 public class Window {
-    private int width, height;
+    private int width;
+    private int height;
     private String title;
     private Long glfwWindow;
     private static Window instance = null;
