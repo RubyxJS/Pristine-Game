@@ -1,6 +1,6 @@
 package com.muby;
 
-import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.*;
 
 public class MouseListener {
     private static final int GLFW_PRESS = 0;

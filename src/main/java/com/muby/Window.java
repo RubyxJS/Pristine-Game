@@ -51,6 +51,7 @@ public class Window {
         glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePoseCallback);
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
 
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
@@ -64,6 +65,10 @@ public class Window {
         while (!glfwWindowShouldClose(glfwWindow)) {
             //Poll events
             glfwPollEvents();
+
+            if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)){
+                System.out.println("Lol");
+            }
             
             glfwSwapBuffers(glfwWindow);
         }
