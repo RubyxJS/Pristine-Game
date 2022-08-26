@@ -1,9 +1,10 @@
 package com.muby;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class KeyListener {
     private static KeyListener instance;
-    private boolean keyPressed[] = new boolean[350];
+    private boolean[] keyPressed = new boolean[350];
 
     private KeyListener() {
 
