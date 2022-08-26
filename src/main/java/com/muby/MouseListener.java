@@ -4,8 +4,12 @@ public class MouseListener {
     private static final int GLFW_PRESS = 0;
     private static final int GLFW_RELEASE = 0;
     private static MouseListener instance;
-    private double scrollX, scrollY;
-    private double xPos, yPos, lastY, lastX;
+    private double scrollX;
+    private double scrollY;
+    private double xPos;
+    private double yPos;
+    private double lastY;
+    private double lastX;
     private boolean mouseButtonPressed[] = new boolean[3];
     private boolean isDragging;
 
