@@ -1,7 +1,5 @@
 package com.muby;
 
-import org.lwjgl.glfw.*;
-
 public class MouseListener {
     private static final int GLFW_PRESS = 0;
     private static final int GLFW_RELEASE = 0;
@@ -28,7 +26,7 @@ public class MouseListener {
     }
 
     public static void mousePoseCallback(long window, double xpos, double ypos){
-        //Setting last values before re-setting 
+        //Setting last values before re-setting
         get().lastX = get().xPos;
         get().lastY = get().yPos;
         get().xPos = xpos;

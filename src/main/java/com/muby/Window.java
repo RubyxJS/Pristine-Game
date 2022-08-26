@@ -1,11 +1,6 @@
 package com.muby;
-import static org.lwjgl.opengl.GL40.*;
-
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.opengl.GL;
-
-import sun.java2d.marlin.Version;
 
 import static org.lwjgl.glfw.GLFW.*;
 public class Window {
@@ -69,7 +64,7 @@ public class Window {
             if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)){
                 System.out.println("Lol");
             }
-            
+
             glfwSwapBuffers(glfwWindow);
         }
     }
