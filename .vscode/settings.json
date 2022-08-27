@@ -1,4 +1,3 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "editor.formatOnSave": true
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
