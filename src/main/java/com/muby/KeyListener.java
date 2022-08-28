@@ -1,4 +1,5 @@
 package com.muby;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class KeyListener {

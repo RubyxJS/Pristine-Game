@@ -1,4 +1,5 @@
 package com.muby;
+
 import static org.lwjgl.opengl.GL40.*;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -8,71 +9,77 @@ import org.lwjgl.opengl.GL;
 import sun.java2d.marlin.Version;
 
 import static org.lwjgl.glfw.GLFW.*;
+
 public class Window {
     private int width, height;
     private String title;
     private Long glfwWindow;
     private static Window instance = null;
     private GLFWErrorCallback errorCallback;
+
     private Window() {
         this.width = 1920;
         this.height = 1080;
         this.title = "Pristine";
     }
+
     public static Window get() {
         if (instance == null) {
             instance = new Window();
         }
         return instance;
     }
-    private void init () {
-        //setup error callback
+
+    private void init() {
+        // setup error callback
         GLFWErrorCallback.createPrint(System.err).set();
 
-        //Inittialize GLFW
-        if (!glfwInit()){
+        // Inittialize GLFW
+        if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW");
         }
         glfwInit();
 
-        //Configure Window
+        // Configure Window
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 
-        //Create Window
+        // Create Window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, 0, 0);
         if (glfwWindow == null) {
             throw new IllegalStateException("Failed to create the GLFW window");
         }
 
-        //Mouse Listener Callbacks
+        // Mouse Listener Callbacks
         glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePoseCallback);
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
         glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
 
-        //Make the OpenGL context current
+        // Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
-        //Enable vsync
+        // Enable vsync
         glfwSwapInterval(1);
-        //Make the Window Visible
+        // Make the Window Visible
         glfwShowWindow(glfwWindow);
         GL.createCapabilities();
     }
+
     private void loop() {
         while (!glfwWindowShouldClose(glfwWindow)) {
-            //Poll events
+            // Poll events
             glfwPollEvents();
 
-            if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)){
+            if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
                 System.out.println("Lol");
             }
-            
+
             glfwSwapBuffers(glfwWindow);
         }
     }
+
     public void run() {
         System.out.println("Hello !");
         init();
