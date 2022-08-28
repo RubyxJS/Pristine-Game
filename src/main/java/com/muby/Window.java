@@ -16,6 +16,9 @@ public class Window {
     private int width, height;
     private String title;
     private Long glfwWindow;
+
+    public float r, g, b, a;
+
     private static Window instance = null;
     private GLFWErrorCallback errorCallback;
 
@@ -28,14 +31,15 @@ public class Window {
     }
 
     public static void changeScene(int newScene) {
-        switch(newScene) {
+        switch (newScene) {
             case 0:
-            currentScene = new LevelEditorScene();
-            break;
+                currentScene = new LevelEditorScene();
+                // currentScene.init();
+                break;
             case 1:
                 currentScene = new LevelScene();
                 break;
-                default:
+            default:
                 assert false : "Unknown scene '" + newScene + "'";
         }
     }
@@ -82,23 +86,34 @@ public class Window {
         // Make the Window Visible
         glfwShowWindow(glfwWindow);
         GL.createCapabilities();
+        Window.changeScene(0);
     }
 
     private void loop() {
+
+        float beginTime = Time.getTime();
+        float endTime;
+        float dt = -1.0f;
+
         while (!glfwWindowShouldClose(glfwWindow)) {
-            float beginTime = Time.getTime();
-            float endTime = Time.getTime();
             // Poll events
             glfwPollEvents();
 
-            if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
+            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            if (dt >= 0) {
+                currentScene.update(dt);
+            }
+
+            if (KeyListener.isKeyPressed(GLFW_KEY_APOSTROPHE)) {
                 System.out.println("Lol");
             }
 
             glfwSwapBuffers(glfwWindow);
 
             endTime = Time.getTime();
-            float dt = endTime - beginTime;
+            dt = endTime - beginTime;
             beginTime = endTime;
         }
     }
