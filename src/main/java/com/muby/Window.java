@@ -25,9 +25,13 @@ public class Window {
     private static Scene currentScene;
 
     private Window() {
-        this.width = 1920;
-        this.height = 1080;
+        this.width = 800;
+        this.height = 600;
         this.title = "Pristine";
+        r = 1;
+        g = 1;
+        b = 1;
+        a = 1;
     }
 
     public static void changeScene(int newScene) {
@@ -99,7 +103,7 @@ public class Window {
             // Poll events
             glfwPollEvents();
 
-            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
             if (dt >= 0) {
