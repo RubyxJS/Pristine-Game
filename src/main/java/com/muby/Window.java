@@ -6,6 +6,8 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.opengl.GL;
 
+import com.muby.util.Time;
+
 import sun.java2d.marlin.Version;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -17,10 +19,25 @@ public class Window {
     private static Window instance = null;
     private GLFWErrorCallback errorCallback;
 
+    private static Scene currentScene;
+
     private Window() {
         this.width = 1920;
         this.height = 1080;
         this.title = "Pristine";
+    }
+
+    public static void changeScene(int newScene) {
+        switch(newScene) {
+            case 0:
+            currentScene = new LevelEditorScene();
+            break;
+            case 1:
+                currentScene = new LevelScene();
+                break;
+                default:
+                assert false : "Unknown scene '" + newScene + "'";
+        }
     }
 
     public static Window get() {
@@ -41,7 +58,7 @@ public class Window {
         glfwInit();
 
         // Configure Window
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
@@ -69,6 +86,8 @@ public class Window {
 
     private void loop() {
         while (!glfwWindowShouldClose(glfwWindow)) {
+            float beginTime = Time.getTime();
+            float endTime = Time.getTime();
             // Poll events
             glfwPollEvents();
 
@@ -77,6 +96,10 @@ public class Window {
             }
 
             glfwSwapBuffers(glfwWindow);
+
+            endTime = Time.getTime();
+            float dt = endTime - beginTime;
+            beginTime = endTime;
         }
     }
 
