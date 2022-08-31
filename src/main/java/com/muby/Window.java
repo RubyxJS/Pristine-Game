@@ -38,10 +38,11 @@ public class Window {
         switch (newScene) {
             case 0:
                 currentScene = new LevelEditorScene();
-                // currentScene.init();
+                currentScene.init();
                 break;
             case 1:
                 currentScene = new LevelScene();
+                currentScene.init();
                 break;
             default:
                 assert false : "Unknown scene '" + newScene + "'";
@@ -86,7 +87,7 @@ public class Window {
         // Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
         // Enable vsync
-    glfwSwapInterval(0);
+        glfwSwapInterval(0);
         // Make the Window Visible
         glfwShowWindow(glfwWindow);
         GL.createCapabilities();

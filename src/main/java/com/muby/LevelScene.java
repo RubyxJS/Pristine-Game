@@ -2,7 +2,7 @@ package com.muby;
 
 public class LevelScene extends Scene {
     public LevelScene() {
-        System.out.println("Inside level scene");
+        //System.out.println("Inside level scene");
         Window.get().r = 2;
         Window.get().g = 1;
         Window.get().b = 1;
